@@ -8,12 +8,8 @@
  */
 
 SemihostingStream::SemihostingStream() {
-  char *stdio_fname=":tt";
-  stdin_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_R, strlen(stdio_fname));
-  stdout_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_W, strlen(stdio_fname));
   inBuffered = 0;
   inReadPos = 0;
-  outBuffered = 0;
 };
 
 SemihostingStream::~SemihostingStream() {
@@ -21,6 +17,13 @@ SemihostingStream::~SemihostingStream() {
   semihosting::sys_close(stdin_handle);
   semihosting::sys_close(stdout_handle);
 }
+
+void SemihostingStream::open() {
+  const char *stdio_fname=":tt";
+  stdin_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_R, strlen(stdio_fname));
+  stdout_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_W, strlen(stdio_fname));
+};
+
 
 /* print on gdb console */
 
@@ -34,7 +37,7 @@ void SemihostingStream::flush() {
   if (outBuffered > 0) semihosting::sys_write(stdout_handle, (void *)outBuffer, outBuffered);
   outBuffered = 0;
   return;
-};
+}
 
 /* read from gdb console */
 

@@ -161,7 +161,7 @@ namespace semihosting
     return semihosting_call(SYS_TMPNAM, (int32_t) args);
   }
 
-  int32_t sys_write(int32_t handle, void *buf, uint32_t count) {
+  int32_t sys_write(int32_t handle, const void *buf, uint32_t count) {
     uint32_t args[] = {
       (uint32_t) handle,
       (uint32_t) buf,
