@@ -20,8 +20,8 @@ SemihostingStream::~SemihostingStream() {
 
 void SemihostingStream::open() {
   const char *stdio_fname=":tt";
-  stdin_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_R, strlen(stdio_fname));
-  stdout_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_W, strlen(stdio_fname));
+  stdin_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_RB, strlen(stdio_fname));
+  stdout_handle = semihosting::sys_open(stdio_fname, semihosting::OPEN_MODE_WB, strlen(stdio_fname));
 };
 
 
